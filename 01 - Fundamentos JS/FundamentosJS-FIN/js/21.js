@@ -1,6 +1,6 @@
 // Scope
 
-const precio
+const precio = 500
 
 function unaFuncion() {
     const precio = 600
