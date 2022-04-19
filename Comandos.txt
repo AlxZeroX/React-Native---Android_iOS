@@ -1,0 +1,22 @@
+npx react-native start --port=8088
+
+adb reverse tcp:8097 tcp:8097
+
+react-native run-android
+
+adb reverse tcp:8088 tcp:8088
+
+C:\Program Files\OpenJDK\openjdk-8u322-b06
+
+---------------------------------------------
+npx react-native start --port=8088
+npx react-native run-android
+adb reverse tcp:8088 tcp:8088
+adb shell input keyevent 82
+---------------------------------------------
+
+npx react-native start --reset-cache --port=8088
+
+json-server db.json
+
+npx react-native run-android -- --reset-cache
