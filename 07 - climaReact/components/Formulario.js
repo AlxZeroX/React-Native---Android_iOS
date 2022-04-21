@@ -1,15 +1,15 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 import { Text, TextInput, View, StyleSheet, TouchableWithoutFeedback, Animated, Alert } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 const Formulario = ({ busqueda, guardarBusqueda, guardarConsultar }) => {
 
-    const {pais, ciudad} = busqueda;
+    const { pais, ciudad } = busqueda;
 
-    const [ animacionboton ] = useState(new Animated.Value(1));
+    const [animacionboton] = useState(new Animated.Value(1));
 
     const consultarClima = () => {
-        if(pais.trim() === '' || ciudad.trim() === '') {
+        if (pais.trim() === '' || ciudad.trim() === '') {
             mostrarAlerta();
             return;
         }
@@ -22,20 +22,20 @@ const Formulario = ({ busqueda, guardarBusqueda, guardarConsultar }) => {
         Alert.alert(
             'Error',
             'Agrega una ciudad y país para la búsqueda',
-            [{ text: 'Entendido '}]
+            [{ text: 'Entendido ' }]
         )
     }
 
     const animacionEntrada = () => {
-        Animated.spring( animacionboton, { 
+        Animated.spring(animacionboton, {
             toValue: .75,
             useNativeDriver: true,
         }).start();
     }
 
     const animacionSalida = () => {
-        Animated.spring( animacionboton, { 
-            toValue: 1, 
+        Animated.spring(animacionboton, {
+            toValue: 1,
             friction: 1,
             tension: 30,
             useNativeDriver: true,
@@ -43,17 +43,17 @@ const Formulario = ({ busqueda, guardarBusqueda, guardarConsultar }) => {
     }
 
     const estiloAnimacion = {
-        transform: [{ scale: animacionboton  }]
+        transform: [{ scale: animacionboton }]
     }
 
-    return ( 
+    return (
         <>
             <View style={styles.formulario}>
                 <View>
-                    <TextInput 
+                    <TextInput
                         value={ciudad}
                         style={styles.input}
-                        onChangeText={ ciudad => guardarBusqueda({ ...busqueda, ciudad }) }
+                        onChangeText={ciudad => guardarBusqueda({ ...busqueda, ciudad })}
                         placeholder="Ciudad"
                         placeholderTextColor="#666"
                     />
@@ -62,10 +62,10 @@ const Formulario = ({ busqueda, guardarBusqueda, guardarConsultar }) => {
                     <Picker
                         selectedValue={pais}
                         itemStyle={{ height: 120, backgroundColor: '#FFF' }}
-                        onValueChange={ pais => guardarBusqueda({ ...busqueda, pais}) }
+                        onValueChange={pais => guardarBusqueda({ ...busqueda, pais })}
                     >
                         <Picker.Item label="-- Seleccione un país --" value="" />
-                        <Picker.Item label="Honduras" value="HN" />                        
+                        <Picker.Item label="Honduras" value="HN" />
                         <Picker.Item label="Estados Unidos" value="US" />
                         <Picker.Item label="México" value="MX" />
                         <Picker.Item label="Argentina" value="AR" />
@@ -77,19 +77,19 @@ const Formulario = ({ busqueda, guardarBusqueda, guardarConsultar }) => {
                 </View>
 
                 <TouchableWithoutFeedback
-                    onPressIn={ () => animacionEntrada() }
-                    onPressOut={ () => animacionSalida()  }
-                    onPress={ () => consultarClima() }
+                    onPressIn={() => animacionEntrada()}
+                    onPressOut={() => animacionSalida()}
+                    onPress={() => consultarClima()}
                 >
                     <Animated.View
-                        style={[ styles.btnBuscar, estiloAnimacion] }
+                        style={[styles.btnBuscar, estiloAnimacion]}
                     >
-                        <Text style={styles.textoBuscar } >Buscar Clima</Text>
+                        <Text style={styles.textoBuscar} >Buscar Clima</Text>
                     </Animated.View>
                 </TouchableWithoutFeedback>
-            </View> 
+            </View>
         </>
-     );
+    );
 }
 
 const styles = StyleSheet.create({
@@ -116,5 +116,5 @@ const styles = StyleSheet.create({
         fontSize: 18
     }
 })
- 
+
 export default Formulario;

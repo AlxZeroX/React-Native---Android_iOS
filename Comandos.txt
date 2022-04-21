@@ -20,3 +20,13 @@ npx react-native start --reset-cache --port=8088
 json-server db.json
 
 npx react-native run-android -- --reset-cache
+
+----------------------------------------------
+cd android
+./gradlew assembleRelease
+./gradlew bundleRelease
+npx react-native run-android --variant=release
+
+./gradlew assembleDebug
+
+
